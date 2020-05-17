@@ -7,6 +7,7 @@ import { commonStyles } from '../../style'
 import ConfigCard from '../../Components/card/ConfigCard'
 
 function ChangeImg() {
+    const commonClasses = commonStyles();
     return (
         <>
             <CommonContainer>
@@ -17,12 +18,26 @@ function ChangeImg() {
                     style={{ height: '100vh' }}
                 >
                     <ConfigCard title="画像変更">
-                        <Link to="configuration">
-                            <Button size="large" variant="contained" color="primary">
+                        <Link to="configuration" className={
+                             commonClasses.txtDecration 
+                            }
+                        >
+                            <Button size="large" variant="contained" className={
+                                commonClasses.subBackColor+
+                                " "+
+                                commonClasses.subTextColor
+                                }
+                            >
                                 これにする
                             </Button>
                         </Link>
-                        <Button size="large" variant="contained" >
+                        <Button size="large" variant="contained" 
+                            className={
+                                commonClasses.mainBackColor+
+                                " "+
+                                commonClasses.thirdTextColor
+                            }
+                        >
                             画像を選ぶ
                         </Button>
                     </ConfigCard>

@@ -17,20 +17,22 @@ const CardTitle = () => {
 }
 
 const CardShare = () => {
+  const commonClasses = commonStyles()
   return (
       <>
       <IconButton>
-        <ShareIcon/>
+        <ShareIcon className={commonClasses.thirdTextColor} />
       </IconButton>
       </>
   )
 }
 
 const CardBookMark = () => {
+  const commonClasses = commonStyles()
   return (
       <>
       <IconButton>
-        <BookmarkIcon　/>
+        <BookmarkIcon　className={commonClasses.thirdTextColor}/>
       </IconButton>
       </>
   )
@@ -38,10 +40,11 @@ const CardBookMark = () => {
 
 const CardDelete = () => {
   const cardClass = CardStyles()
+  const commonClasses = commonStyles()
   return (
       <>
       <IconButton className={cardClass.deleteBtn}>
-        <DeleteIcon　/>
+        <DeleteIcon　className={commonClasses.thirdTextColor}/>
       </IconButton>
       </>
   )

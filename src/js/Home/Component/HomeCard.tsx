@@ -13,27 +13,25 @@ const HomeCard = () => {
     const cardClass = CardStyles()
     return (
         <div className={cardClass.Card}>
-            <Container fixed>
-                <Grid container spacing={3}>
-                    <Grid v-for={13} item xs={12} md={6} lg={3}>
-                        <Card>
-                            <CardContent>
-                                <Typography color="textSecondary" gutterBottom>
-                                    Title
-                                </Typography>
-                            </CardContent>
-                            <CardContent>
-                                <CardTitle></CardTitle>
-                            </CardContent>
-                            <CardActions disableSpacing>
-                                <CardBookMark />
-                                <CardShare />
-                                <CardDelete />
-                            </CardActions>
-                        </Card>
-                    </Grid>
+            <Grid container spacing={3}>
+                <Grid v-for={13} item xs={12} md={6} lg={3}>
+                    <Card className={cardClass.cardBottom}>
+                        <CardContent>
+                            <Typography color="textSecondary" gutterBottom>
+                                Title
+                            </Typography>
+                        </CardContent>
+                        <CardContent>
+                            <CardTitle></CardTitle>
+                        </CardContent>
+                        <CardActions disableSpacing>
+                            <CardBookMark />
+                            <CardShare />
+                            <CardDelete />
+                        </CardActions>
+                    </Card>
                 </Grid>
-            </Container>
+            </Grid>
         </div>
     )
 }

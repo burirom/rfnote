@@ -1,12 +1,13 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { LoginRouterComponent } from "./router";
+import { store } from './Redux/store'
+import RouterComponent  from "./router";
 
 class Layout extends React.Component {
   render() {
     return (
       <>
-        <LoginRouterComponent />
+        <RouterComponent />
       </>
     );
   }

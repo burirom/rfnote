@@ -1,5 +1,4 @@
 import * as React from 'react';
-import LoginTitleBar from '../../Components/Header/TitleBar'
 import LoginCard from '../Component/LoginCard'
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
@@ -9,7 +8,6 @@ const LoginPage = () => {
   const commonClasses = commonStyles();
   return (
       <div className={commonClasses.mainBackColor}>
-          <LoginTitleBar />
           <Container fixed>
           <Grid
                 container

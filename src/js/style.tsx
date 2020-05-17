@@ -8,19 +8,22 @@ const commonStyles = makeStyles((Theme) =>
       background:'#f7f7f7'
     },
     subBackColor: {
-      background:'#323643'
+      background:'#323643 !important'
     },
     thirdBackColor: {
-      background:'#93deff'
+      background:'#93deff !important'
     },
     fourthBackColor: {
       background:'#606470'
     },
     maintextcolor: {
-        color: '#ffffff'
+        color: '#ffffff !important'
     },
     subTextColor: {
-      color: '#93deff'
+      color: '#93deff !important'
+    },
+    thirdTextColor: {
+      color: '#323643 !important'
     },
     pd0:{
       padding: '0'
@@ -33,6 +36,12 @@ const commonStyles = makeStyles((Theme) =>
     },
     height100: {
       height: "100vh"
+    },
+    txtDecration: {
+      textDecoration: 'none'
+    },
+    borderSubColor:{
+      borderColor: '#323643 !important'
     }
   }),
 );
@@ -40,13 +49,10 @@ const commonStyles = makeStyles((Theme) =>
 const searchStyles = makeStyles((Theme) =>
   createStyles({
     searchBar: {
-        marginTop: '90px',
-        position: 'fixed',  
-        left: '50%',
-        top: '0',
-        transform: 'translateX(-50%)',
-        maxWidth: '90%',
-        width: '90%',
+        paddingTop: '100px',
+        paddingBottom: '30px',
+        maxWidth: '100%',
+        width: '100%',
         maxHeight: '60px',
         display: 'flex',
         justifyContent: 'center',
@@ -58,7 +64,6 @@ const searchStyles = makeStyles((Theme) =>
       background: '#ffffff'
     },
     searchBtn: {
-      marginLeft: '5px',
       width: '10%',
       height: '100%'
     }
@@ -74,7 +79,7 @@ const footerStyles = makeStyles((Theme) =>
         bottom: '0',
         left: '0',
         right: '0',
-        borderTop: '3px solid #93deff'
+        borderTop: '2px solid #93deff'
     },
     root: {
       background:'#323643'
@@ -85,7 +90,10 @@ const footerStyles = makeStyles((Theme) =>
 const CardStyles = makeStyles((Theme) =>
   createStyles({
     Card: {
-      paddingTop:'150px',
+      paddingTop:'10px',
+    },
+    cardBottom: {
+      borderBottom: '2px solid #323643'
     },
     deleteBtn: {
       marginLeft: 'auto'
@@ -105,8 +113,8 @@ const FormatStyles = makeStyles((Theme) =>
       left: "0",
       right: "0"
     },
-    mt100: {
-      marginTop: "100px"
+    mt70: {
+      marginTop: "70px"
     }
   }))
 export {commonStyles, searchStyles,footerStyles,CardStyles,FormatStyles};

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { commonStyles,footerStyles }from '../../style'
+import { footerStyles }from '../../style'
 import useReactRouter from 'use-react-router';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
@@ -49,4 +49,5 @@ const FooterBar = () => {
         </>
     )
 }
+
 export default FooterBar;

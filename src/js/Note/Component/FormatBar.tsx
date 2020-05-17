@@ -27,6 +27,7 @@ import CameraAltOutlinedIcon from '@material-ui/icons/CameraAltOutlined';
 import ShareIcon from '@material-ui/icons/Share';
 
 
+
 function FormatBar () {
     const CommonClases =  commonStyles()
     const FormatBarClases = FormatStyles()

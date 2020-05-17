@@ -5,6 +5,7 @@ import Box from '@material-ui/core/Box';
 import { commonStyles } from '../../style'
 import Button from '@material-ui/core/Button';
 import ConfigCard from '../../Components/card/ConfigCard'
+import { store } from '../../Redux/store';
 
 const ConfigurationPage = () => {
     const commonClasses = commonStyles();
@@ -18,13 +19,24 @@ const ConfigurationPage = () => {
                     style={{ height: '100vh' }}
                 >
                     <ConfigCard title="ユーザー名">
-                        <Link to="ChangeImg">
-                            <Button size="large" variant="contained" color="primary">
+                        <Link to="ChangeImg" className={ commonClasses.txtDecration }>
+                            <Button size="large" variant="contained" className={
+                                commonClasses.subBackColor+
+                                " "+
+                                commonClasses.subTextColor
+                                }
+                            >
                                 画像変更
                             </Button>
                         </Link>
-                        <Link to="/">
-                        <Button size="large" variant="contained" >
+                        <Link onClick={() => store.dispatch({ type: 'LOGIN', payload: false})} to="/login" className={ commonClasses.txtDecration }>
+                        <Button size="large" variant="contained" 
+                        className={
+                            commonClasses.mainBackColor+
+                            " "+
+                            commonClasses.thirdTextColor
+                            }
+                        >
                             ログアウト
                         </Button>
                         </Link>

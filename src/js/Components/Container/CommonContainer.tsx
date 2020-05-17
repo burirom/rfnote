@@ -8,7 +8,7 @@ const CommonContainer = ({children}) => {
         <>
         <CssBaseline />
         <Container fixed>
-           <Typography component="div" style={{ backgroundColor: '#cfe8fc', height: '100vh' }}>
+           <Typography component="div" style={{ height: '100vh' }}>
                {children}
             </Typography>
         </Container>

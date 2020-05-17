@@ -25,9 +25,9 @@ const LoginCard = () => {
     const commonClasses = commonStyles()
     return (
         <>
-                <Card className={classes.root+" "+commonClasses.subBackColor} variant="outlined">
+                <Card className={classes.root+" "} variant="outlined">
                     <CardContent>
-                        <h2 className={classes.title +" "+commonClasses.subTextColor}>Login</h2>
+                        <h2 className={classes.title +" "+commonClasses.thirdTextColor}>Login</h2>
                         <LoginInput />
                         <LoginBtn />
                     </CardContent>

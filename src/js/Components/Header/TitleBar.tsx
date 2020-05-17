@@ -11,7 +11,7 @@ const useStyles = makeStyles({
     }
 });
 
-const LoginTitleBar = () => {
+const TitleBar = () => {
    const classes = useStyles();
    const commonClasses = commonStyles()
   return (
@@ -24,4 +24,4 @@ const LoginTitleBar = () => {
       </div>
   )
 }
- export default  LoginTitleBar;
+ export default TitleBar;

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { commonStyles, CardStyles } from '../../style'
 import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
@@ -12,10 +11,9 @@ const BooKMarkCard = () => {
     const cardClass = CardStyles()
     return (
         <div className={cardClass.Card}>
-            <Container fixed>
                 <Grid container spacing={3}>
                     <Grid v-for={13} item xs={12} md={6} lg={3}>
-                        <Card>
+                        <Card className={cardClass.cardBottom}>
                             <CardContent>
                                 <Typography color="textSecondary" gutterBottom>
                                     Title
@@ -31,7 +29,6 @@ const BooKMarkCard = () => {
                         </Card>
                     </Grid>
                 </Grid>
-            </Container>
         </div>
     )
 }

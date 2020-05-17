@@ -1,15 +1,16 @@
 import * as React from 'react';
+import { store } from '../../Redux/store'
 import SerchBar from '../../Components/SearchBar/SearchBar'
 import HomeCard from '../Component/HomeCard'
-import { commonStyles } from '../../style'
+import CommonContainer from '../../Components/Container/CommonContainer'
 
 function Home () {
-    const commonClasses = commonStyles();
+    console.log('ホーム',store.getState())
     return (
-        <div className={commonClasses.mainBackColor + " " + commonClasses. height100}>
+        <CommonContainer>
           <SerchBar />
           <HomeCard />
-        </div>
+        </CommonContainer>
     )
 }
 
