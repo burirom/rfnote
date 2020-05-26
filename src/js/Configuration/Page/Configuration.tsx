@@ -6,9 +6,17 @@ import { commonStyles } from '../../style'
 import Button from '@material-ui/core/Button';
 import ConfigCard from '../../Components/card/ConfigCard'
 import { store } from '../../Redux/store';
+import { signOut } from '../../../API/firebase/Auth.js'
 
 const ConfigurationPage = () => {
     const commonClasses = commonStyles();
+
+    const handleLogout = async () => {
+        console.log('ログアウトしました。')
+        await signOut()
+        store.dispatch({ type: 'LOGIN', payload: false})
+    }
+
     return (
         <>
             <CommonContainer>
@@ -29,17 +37,16 @@ const ConfigurationPage = () => {
                                 画像変更
                             </Button>
                         </Link>
-                        <Link onClick={() => store.dispatch({ type: 'LOGIN', payload: false})} to="/login" className={ commonClasses.txtDecration }>
                         <Button size="large" variant="contained" 
                         className={
                             commonClasses.mainBackColor+
                             " "+
                             commonClasses.thirdTextColor
                             }
+                            onClick={handleLogout}
                         >
                             ログアウト
                         </Button>
-                        </Link>
                     </ConfigCard>
                 </Box>
             </CommonContainer>

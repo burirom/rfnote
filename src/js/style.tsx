@@ -42,6 +42,9 @@ const commonStyles = makeStyles((Theme) =>
     },
     borderSubColor:{
       borderColor: '#323643 !important'
+    },
+    errorTextColor: {
+      color: '#fe1235'
     }
   }),
 );

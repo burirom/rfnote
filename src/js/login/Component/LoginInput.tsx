@@ -1,19 +1,15 @@
 import * as React from 'react';
-import { makeStyles , withStyles } from '@material-ui/core/styles';
+import { ContextContainer } from '../Page/Loginpage'
+
+import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid';
-import { commonStyles } from '../../style'
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import FilledInput from '@material-ui/core/FilledInput';
-import { common } from '@material-ui/core/colors';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import IconButton from '@material-ui/core/IconButton';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
-
+//スタイル調整
 const useStyles = makeStyles({
     root: {
         minWidth: 275
@@ -30,89 +26,55 @@ const useStyles = makeStyles({
     }
 });
 
-const ValidationTextField = withStyles({
-    // root: {
-    //   '& input:valid + fieldset': {
-    //     color: '#93deff',
-    //     borderColor: '#93deff',
-    //     borderWidth: 2,
-    //   },
-    //   '& input:invalid + fieldset': {
-    //     borderColor: 'red',
-    //     borderWidth: 2,
-    //   },
-    //   '& input:valid:focus + fieldset': {
-    //     borderWidth: 2,
-    //     color: '#93deff',
-    //     borderColor: '#93deff'   
-    //   },
-    //   '& input:hover': {
-          
-    //   }
-    // },
-  })(TextField);
-
-  // interface State {
-  //   password: string;
-  //   showPassword: boolean;
-  // }
-
 const LoginInput = () => {
     const classes = useStyles();
-    const commonClasses = commonStyles()
-    const [values, setValues] = React.useState({
-      password: '',
-      showPassword: false
-    })
-    const handleChange = (prop) => (event) => {
-      setValues({ ...values, [prop]: event.target.value });
+    const {
+      email,
+      setEmail, 
+      password,
+      setPassword 
+    } = React.useContext(ContextContainer)
+
+    const handleChange = (status) => (e) => {
+      switch(status) {
+        case 'EMAIL':
+          setEmail(e.target.value)
+          break;
+        case 'PASSWORD':
+          setPassword(e.target.value)
+          break;
+        default:
+          setPassword('')
+      }
     };
   
-    const handleClickShowPassword = () => {
-      setValues({ ...values, showPassword: !values.showPassword });
-    };
-  
-    const handleMouseDownPassword = (event) => {
-      event.preventDefault();
-    };
     return (
         <>
           <Grid container spacing={3}>
             <Grid item xs={12}>
-              <ValidationTextField
-              id="filled-basic" 
-              label="Username"
-              type="search" 
-              variant="filled" 
-              className={
-                clsx(
-                  classes.textarea
-                )
-              }
+              <TextField
+                id="filled-basic" 
+                label="Username"
+                type="search" 
+                variant="filled" 
+                className={
+                  clsx(
+                    classes.textarea
+                  )
+                }
+                value={ email }
+                onChange={handleChange('EMAIL')}     
               />
             </Grid>
           <Grid item xs={12}>
             <FormControl className={clsx(classes.textarea)} variant="filled">
-            <InputLabel htmlFor="filled-adornment-password">Password</InputLabel>
-            <FilledInput
-              id="filled-adornment-password"
-              type={values.showPassword ? 'text' : 'password'}
-              value={values.password}
-              onChange={handleChange('password')}
-          
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                  >
-                    {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-                </InputAdornment>
-              }
-            />
+              <InputLabel htmlFor="filled-adornment-password">Password</InputLabel>
+                <FilledInput
+                  id="filled-adornment-password"
+                  type={'password'}
+                  value={password}
+                  onChange={handleChange('PASSWORD')}
+                />
           </FormControl>
           </Grid>
           </Grid>

@@ -2,7 +2,7 @@ import * as React from "react";
 import { store } from './Redux/store'
 import Auth from './Auth'
 import { Provider } from 'react-redux'
-import { Router, Route,Switch,Redirect } from "react-router-dom";
+import { Router, Route, Redirect } from "react-router-dom";
 import { createBrowserHistory } from 'history';
 import Loginpage from "./login/Page/Loginpage"
 import Home from "./Home/Page/Home"
@@ -12,6 +12,7 @@ import TitleBar from './Components/Header/TitleBar'
 import Configuration from './Configuration/Page/Configuration'
 import ChangeImg from './ChangeImg/Page/ChangeImg'
 import Note from './Note/Page/NotePage'
+import SignUp from './SginUp/Page/SignUpPage'
 
 const RouterComponent = () => {
     console.log('ルーター',store.getState())
@@ -20,6 +21,7 @@ const RouterComponent = () => {
             <Router history={createBrowserHistory()}>
                 <TitleBar />
                 <Route exact path='/login' component={Loginpage} />
+                <Route exact path='/signup' component={SignUp} />
                     <Auth>
                         <FooterBar />
                         <Route exact path={['/home', '/']} component={Home} />

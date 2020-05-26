@@ -1,16 +1,9 @@
 import * as React from 'react'
 import { commonStyles,FormatStyles } from '../../style'
 import Box from '@material-ui/core/Box';
-import TextField from '@material-ui/core/TextField';
+import { EditorState,convertFromRaw } from 'draft-js'
 import { Editor } from 'react-draft-wysiwyg';
 import '../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-
-const EditorComponent = () => <Editor 
-          toolbar = {toolBar}
-          wrapperClassName="wrapper-class"
-          editorClassName="editor-class"
-          toolbarClassName="toolbar-class"
-        />
 
 const toolBar = {
   options: [ 'blockType', 'fontSize', 'fontFamily', 'list', 'textAlign', 'colorPicker', 'emoji', 'image'],
@@ -101,12 +94,33 @@ const toolBar = {
     },
   }
 }
-function InputArea () {
+
+
+const testData = {"contentState":{"blocks":[{"key":"d0jlh","text":"テストだお","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":{}}}
+
+
+const  InputArea = () => {
     const FormatClasses = FormatStyles()
     const  commonClasses = commonStyles()
+
+    const contentDefaultData = {"entityMap":{},"blocks":[{"key":"637gr","text":"Initialized from content state.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}]};
+    
+    const contentState = convertFromRaw(contentDefaultData);
+    const [content,setContent] = React.useState(contentState);
+
+    const onContentStateChange = (content) => {
+      setContent(content)
+    }
     return (
         <Box className={FormatClasses.mt70}>
-        <EditorComponent />
+          <Editor 
+            // editorState = {content}
+            toolbar = {toolBar}
+            wrapperClassName="wrapper-class"
+            editorClassName="editor-class"
+            toolbarClassName="toolbar-class"
+            onContentStateChange={onContentStateChange}
+        />
         </Box>
     )
 }

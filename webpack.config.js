@@ -2,7 +2,7 @@ var path    = require('path');
 
 module.exports = {
   context: path.join(__dirname, "src"),
-  entry: "./js/main.tsx",
+  entry: ['@babel/polyfill', './js/main.tsx'],
   module: {
     rules: [{
       test: /\.tsx?$/,
@@ -21,6 +21,16 @@ module.exports = {
           loader: 'style-loader',
           loader: 'css-loader?modules',
         }]
+      },
+      {
+        test: /\.m?js$/,
+        exclude: /node_modules/,
+        use: {
+            loader: 'babel-loader',
+            options: {
+                presets: ['@babel/preset-env']
+            }
+        }
       }
     ]
     },

@@ -1,8 +1,7 @@
 
 import * as React from 'react';
 import clsx from 'clsx';
-import { Link } from 'react-router-dom';
-import { store } from '../../Redux/store';
+import { Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -27,10 +26,9 @@ const useStyles = makeStyles({
     }
 });
 
-const LoginInput = () => {
+const LoginInput = (props) => {
     const classes = useStyles();
     const commonClasses = commonStyles();
-    console.log(store.getState())
     return (
         <>
         <Grid container spacing={2} className={
@@ -39,15 +37,7 @@ const LoginInput = () => {
             )
           }
         >
-        <Grid item xs={12}>
-        <Link onClick={
-            () => store.dispatch({ type: 'LOGIN', payload: true})
-            } 
-            to="home"
-            className={
-                clsx(commonClasses.txtDecration)
-            }
-        >
+        <Grid item xs={12}>        
            <Button 
                 variant="contained" 
                 disableElevation 
@@ -58,21 +48,13 @@ const LoginInput = () => {
                     commonClasses.subTextColor
                   )
                 }
+                onClick={props.onClick}
             >
               Login
            </Button>
-           </Link>
         </Grid>
         <Grid item xs={12}>
-        <Link 
-            onClick={
-                () => store.dispatch({ type: 'LOGIN', payload: true})
-            } 
-            to="home"
-            className={
-                commonClasses.txtDecration
-            }
-        >
+            <Link to="signup">
             <Button variant="outlined"
                 disableElevation 
                 className={
@@ -83,9 +65,9 @@ const LoginInput = () => {
                   )
                 }
             >
-             Google Login
+             SignUp
            </Button>  
-        </Link>
+           </Link>
         </Grid>
 
         </Grid>
