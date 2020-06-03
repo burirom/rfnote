@@ -13,15 +13,16 @@ import Configuration from './Configuration/Page/Configuration'
 import ChangeImg from './ChangeImg/Page/ChangeImg'
 import Note from './Note/Page/NotePage'
 import SignUp from './SginUp/Page/SignUpPage'
+import Share from './Shrare/page/ShrarePage'
 
 const RouterComponent = () => {
-    console.log('ルーター',store.getState())
     return (
         <Provider store={store}>
             <Router history={createBrowserHistory()}>
                 <TitleBar />
                 <Route exact path='/login' component={Loginpage} />
                 <Route exact path='/signup' component={SignUp} />
+                {/* <Route exact path='/share' component={Share} /> */}
                     <Auth>
                         <FooterBar />
                         <Route exact path={['/home', '/']} component={Home} />

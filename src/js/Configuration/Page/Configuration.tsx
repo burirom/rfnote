@@ -7,10 +7,18 @@ import Button from '@material-ui/core/Button';
 import ConfigCard from '../../Components/card/ConfigCard'
 import { store } from '../../Redux/store';
 import { signOut } from '../../../API/firebase/Auth.js'
+import { getUserImgUrl } from '../../../API/firebase/Store.js'
 
 const ConfigurationPage = () => {
     const commonClasses = commonStyles();
+    const [imgUrl, setImgUrl ] = React.useState(store.getState().userData.imgurl)
 
+    React.useEffect(() => {
+        setImgUrl(store.getState().userData.imgurl)
+        return
+    })
+
+      
     const handleLogout = async () => {
         console.log('ログアウトしました。')
         await signOut()
@@ -26,7 +34,7 @@ const ConfigurationPage = () => {
                     justifyContent="center"
                     style={{ height: '100vh' }}
                 >
-                    <ConfigCard title="ユーザー名">
+                    <ConfigCard title={store.getState().user.email} imgUrl={imgUrl} >
                         <Link to="ChangeImg" className={ commonClasses.txtDecration }>
                             <Button size="large" variant="contained" className={
                                 commonClasses.subBackColor+

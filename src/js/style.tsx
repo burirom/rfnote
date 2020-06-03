@@ -104,6 +104,10 @@ const CardStyles = makeStyles((Theme) =>
     large: {
       width: Theme.spacing(10),
       height: Theme.spacing(10),
+    },
+    mainContent: {
+      width: '100%',
+      textAlign: 'start'
     }
   }),
 );
@@ -120,4 +124,13 @@ const FormatStyles = makeStyles((Theme) =>
       marginTop: "70px"
     }
   }))
-export {commonStyles, searchStyles,footerStyles,CardStyles,FormatStyles};
+
+  const ChangeImgStyles = makeStyles((Theme) => 
+  createStyles({
+    inputFile: {
+      opacity:'0',
+      appearance: 'none',
+      position: 'absolute'
+    }
+  }))
+export {commonStyles, searchStyles,footerStyles,CardStyles,FormatStyles,ChangeImgStyles};

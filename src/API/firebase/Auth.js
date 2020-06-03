@@ -27,17 +27,14 @@ const signOut = async () => {
     await firebase.auth().signOut();
 }
 
-//既にログインしているかチェック
-const userAlreadyLogin = async () => {
-    let checkLogin = false;
-    await firebase.auth().onAuthStateChanged((user) => {
-        if(user) {
-            // checkLogin = true
-        }
-    })
-    // console.log('チェックlogウイン',checkLogin)
-    // return checkLogin
+//ユーザーidをゲット
+const getUser = async () => {
+    var user = await firebase.auth().currentUser;
+    const email = user.email;
+    const userId = user.uid;
+    if (user != null ) return {email,userId}
+    return ''
 }
 
 
-export { signUp , signIn, userAlreadyLogin, signOut }
+export { signUp , signIn, signOut, getUser }

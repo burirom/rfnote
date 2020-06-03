@@ -22,9 +22,10 @@ const useStyles = makeStyles((theme) =>
   }),
 );
 
-const ConfigCard = ({title,children}) => {
+const ConfigCard = ({imgUrl,title,children}) => {
     const classes = useStyles();
     const commonClasses = commonStyles();
+
     return (
     <Card className={commonClasses.width100}>
       <CardContent>
@@ -32,7 +33,10 @@ const ConfigCard = ({title,children}) => {
         　display="flex"
         　justifyContent="center"
         >
-        <Avatar src="../../../img/testicon.png" className={classes.large}/>
+        <Avatar
+         src={imgUrl} 
+         className={classes.large}
+         />
         </Box>
         <Box
         　display="flex"

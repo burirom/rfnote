@@ -6,12 +6,15 @@ import LoginCard from '../Component/LoginCard'
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import { commonStyles } from '../../style'
-import { signIn } from '../../../API/firebase/Auth.js';
+import { signIn,getUser } from '../../../API/firebase/Auth.js';
+import { getUserImgUrl } from '../../../API/firebase/Store.js';
 import { alreadyLoginCheck } from '../../Auth'
 
 //ログインステータスをセット
-const setLoginStatus = (isLogin) => {
-    store.dispatch({ type:'LOGIN', payload: isLogin})
+const setLoginStatus = async (isLogin,UserId,userData) => {
+  store.dispatch({ type:'SET_USER_DATA', payload: userData})
+  store.dispatch({ type:'SET_USER', payload: UserId})
+  store.dispatch({ type:'LOGIN', payload: isLogin})
 }
 
 //バリデーション
@@ -35,7 +38,9 @@ const LoginPage = () => {
 
   React.useEffect(() => {
     alreadyLoginCheck()
-    return function cleanup () {alreadyLoginCheck()}
+    // const UserId = getUserId()
+    // alreadyLoginCheck() ? setLoginStatus(true,UserId) : setLoginStatus(false,'')
+    return
   })
 
   const handleEvent = async () => {
@@ -54,18 +59,15 @@ const LoginPage = () => {
 
     //ログイン処理
     const loginStatus = await signIn(email,password)
+    console.log( 'logウイン',loginStatus )
     　//ログイン失敗時
      if ( !loginStatus ) {
       setErrorMessage('メールアドレスまたはパスワードが違います。')
       //ローディング終了
       setLoading(false)
-      setLoginStatus(false)
+      setLoginStatus(false,'',{})
       return
      }
-
-     //ログイン成功時
-     setLoginStatus(true)
-     
      return
   }
   return (

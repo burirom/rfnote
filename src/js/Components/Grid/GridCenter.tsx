@@ -8,7 +8,7 @@ const GridCenter = ({children}) => {
         <>
         <Grid
           container
-          direction="column"
+          direction="row"
           justify="center"
           alignItems="center"
         >

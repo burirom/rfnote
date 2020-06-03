@@ -6,7 +6,9 @@ import '../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.cs
 
 import GridCenter from '../../Components/Grid/GridCenter'
 import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 import NavigationIcon from '@material-ui/icons/Navigation';
+import Grid from '@material-ui/core/Grid';
 
 import useReactRouter from 'use-react-router';
 
@@ -103,23 +105,9 @@ const toolBar = {
   }
 }
 
-const getParam = (url) => {
-  
-  const pair = url.slice(1).split('&');
-  // const pair = url.split('&');
-  let data = [];
-
-  for(let i=0; pair[i]; i++) {
-    const keyValue = pair[i].split('=');
-    data[keyValue[0]]=keyValue[1];
-  }
-  console.log(data)
-  return data
-
-}
-
 const  InputArea = () => {
     const FormatClasses = FormatStyles()
+    const commonClasses = commonStyles()
     const userID = store.getState().user.userId
     const { history } = useReactRouter();
     
@@ -127,8 +115,6 @@ const  InputArea = () => {
     
 
     React.useEffect(() => {
-      const url = store.getState().query
-      console.log(getParam(url))
       return () => {
         store.dispatch({ type: 'SET_ACTIVE_DATA', payload: null})
       } 
@@ -147,6 +133,9 @@ const  InputArea = () => {
     const [content,setContent] = React.useState(noteStoreData);
 
 
+   const onContentStateChange = (contentData) => {
+      setContent(contentData)
+    }
 
     const sendData = async () => {
 
