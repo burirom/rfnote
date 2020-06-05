@@ -8,11 +8,18 @@ const loginState = {
     },
     userData: {},
     noteData: [],
+    noteActiveData: {},
     bookMark: {},
     noteActiveID: null,
-    query: ''
+    query: '',
+    queryData: {
+        user: '',
+        id: ''
+    }
 
 } 
+
+//vTKLHc3L4pgxj30LucOjmvOxjxL2 8lf1dPcrsGnIsX9mRjWG
 
 const reducer = (state = loginState, action) => {
     switch(action.type) {
@@ -20,10 +27,14 @@ const reducer = (state = loginState, action) => {
             return { ...state, isLogin: action.payload }
         case 'SET_QUERY': 
             return { ...state, query: action.payload}
+        case 'SET_QUERY_DATA': 
+            return { ...state, queryData: action.payload}
         case 'SET_USER':
             return { ...state, user: action.payload}
         case 'SET_USER_DATA': 
             return { ...state, userData: action.payload}
+        case 'SET_NOTE_ACTIVE_DATA': 
+            return { ...state, noteActiveData: action.payload}
         case 'SET_USER_DATA_IMG':
             return { ...state, userData: {imgurl: action.payload}}
         case 'SET_NOTE_DATA':
@@ -36,7 +47,7 @@ const reducer = (state = loginState, action) => {
         case 'DELETE_NOTE_DATA':
             const data = removeItem(state.noteData,action.payload)
             return { ...state, noteData: data }
-        case 'SET_ACTIVE_DATA':
+        case 'SET_ACTIVE_ID':
             return { ...state, noteActiveID: action.payload }
         default:
             return state;

@@ -35,8 +35,9 @@ const HomeCard = () => {
     }
 
     const sendData = (id) => {
-        console.log('id',id)
-        store.dispatch({ type: 'SET_ACTIVE_DATA', payload: id})
+        const noteData = store.getState().noteData
+        const contentData = noteData.filter(data => data.id === id)
+        store.dispatch({type: 'SET_NOTE_ACTIVE_DATA', payload: contentData[0].data.data})
         history.push('note')
     }
 

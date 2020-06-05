@@ -90,8 +90,8 @@ const deleteNote =  (userID,noteID) => {
 }
 
 
-//NoteData取得
-const getNoteData = async (userID) => {
+//NoteData全件取得
+const getAllNoteData = async (userID) => {
     const docRefUser = store.collection('user').doc(userID);
     const docRefNote = docRefUser.collection("Note").orderBy("update", "desc");
     let noteData = 
@@ -104,6 +104,22 @@ const getNoteData = async (userID) => {
         });
     
     return noteData  
+}
+
+
+//NoteData取得
+const getNoteData = async (userID,NoteID) => {
+    const docRefUser = store.collection('user').doc(userID);
+    const docRefNote = docRefUser.collection("Note").doc(NoteID);
+    const noteData = 
+        await docRefNote.get().then((doc) => {
+            if(doc) {
+                console.log('データ',doc.data().data)
+                return doc.data()
+            }
+        });
+    
+    return noteData 
 }
 
 /* Share */
@@ -141,5 +157,6 @@ export {
     updateNote,
     updateBookMark,
     deleteNote,
+    getAllNoteData,
     getNoteData
 }
