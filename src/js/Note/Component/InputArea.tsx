@@ -15,23 +15,7 @@ import { store } from '../../Redux/store'
 import { insertNote,updateNote,getAllNoteData } from '../../../API/firebase/Store.js'
 
 
-
-const getParam = (url) => {
-  
-  const pair = url.slice(1).split('&');
-  // const pair = url.split('&');
-  let data = [];
-
-  for(let i=0; pair[i]; i++) {
-    const keyValue = pair[i].split('=');
-    data[keyValue[0]]=keyValue[1];
-  }
-  console.log(data)
-  return data
-
-}
-
-const  InputArea = () => {
+const  InputArea =  () => {
     const FormatClasses = FormatStyles()
     const userID = store.getState().user.userId
     const { history } = useReactRouter();
@@ -40,16 +24,17 @@ const  InputArea = () => {
     
 
     React.useEffect(() => {
-      const url = store.getState().query
-      console.log(getParam(url))
       return () => {
         store.dispatch({ type: 'SET_ACTIVE_ID', payload: null})
         store.dispatch({ type: 'SET_NOTE_ACTIVE_DATA', payload: {}})
+        store.dispatch({ type: 'SET_QUERY', payload: '' })
+        store.dispatch({ type: 'SET_QUERY_DATA', payload: {} })
       } 
     },[])
 
 
     const getStoreNoteData = () => {
+      console.log('ノートページ3')
       const noteLength = Object.keys(store.getState().noteActiveData).length
       return noteLength !== 0  ? store.getState().noteActiveData : nullContentDefaultData
     }

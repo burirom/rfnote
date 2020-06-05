@@ -7,6 +7,8 @@ import Switch from '@material-ui/core/Switch'
 import Container from '@material-ui/core/Container'
 import Box from '@material-ui/core/Box'
 
+import {updateShare} from '../../../API/firebase/Store.js'
+
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -39,13 +41,6 @@ const useStyles = makeStyles((theme) =>
 const ShareModal = (props) => {
 
     const classes = useStyles();
-    const [switchState,setSwitchState] = React.useState({
-        checked: false
-    })
-
-    const switchHandleOpen = (event) => {
-        setSwitchState({ ...switchState, checked: event.target.checked})
-    }
 
 
    return (
@@ -71,15 +66,15 @@ const ShareModal = (props) => {
                                 <Box display="flex" alignItems="center">
                                     <h2>共有リンクの作成</h2>
                                     <Switch 
-                                    checked={switchState.checked}
-                                        onChange={switchHandleOpen}
+                                        checked={props.shareStatus}
+                                        onChange={props.switchOnChangeHandle}
                                         color="primary"
                                     />
                                 </Box>
                                 <input 
                                    type="text"
                                    readOnly 
-                                   value={props.noteId} 
+                                   value={props.shareUrl} 
                                    className={classes.input}
                                 />
                             </div>

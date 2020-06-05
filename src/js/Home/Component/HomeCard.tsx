@@ -11,14 +11,13 @@ import useReactRouter from 'use-react-router';
 
 import { store } from '../../Redux/store'
 
-import { deleteNote,updateBookMark } from '../../../API/firebase/Store.js'
+import { deleteNote,updateBookMark,updateShare,getShareStatus } from '../../../API/firebase/Store.js'
+
 
 
 const HomeCard = () => {
     const cardClass = CardStyles()
-
     const { history } = useReactRouter();
-
     const userId = store.getState().user.userId
     const [noteData,setNoteData] = React.useState( store.getState().noteData)
 
@@ -41,6 +40,18 @@ const HomeCard = () => {
         history.push('note')
     }
 
+    const setShareUrl = (userId,noteId) => {
+        // console.log(userId,noteId)
+        return location.origin + '/note?user='+userId+'&id='+noteId
+    }
+
+
+    // //共有リンクステータスセット
+    // const switchOnChangeHandle = async (id) => {
+    //     await console.log('aaaaa',id)
+    // }
+
+
     return (
         <div className={cardClass.Card}>
             <Grid container spacing={3}>
@@ -51,6 +62,14 @@ const HomeCard = () => {
                 const title = data.data.data.blocks[0].text
                 const id = data.id
                 const bookMark = data.data.bookMark
+                const userId = store.getState().user.userId
+                const shareStatus = (userId,id) => {
+                    return getShareStatus(userId,id)
+                }
+                const switchOnChangeHandle = async (event) => {
+                    console.log('ステータス',event.target.checked,'リアルタイム')
+                    await updateShare(userId,id,event.target.checked)
+                }
                 return (
                     <Grid key={idx} item xs={12} md={6} lg={3}>
                         <Card className={cardClass.cardBottom}>
@@ -75,7 +94,11 @@ const HomeCard = () => {
                                 }}
                                 active={bookMark} 
                                 />
-                                <CardShare />
+                                <CardShare 
+                                   shareUrl={setShareUrl(userId,id)}
+                                   shareStatus = {shareStatus(userId,id)}
+                                   switchOnChangeHandle={switchOnChangeHandle}
+                                />
                                 <CardDelete onClick={() => {
                                     deleteEvent(id)
                                 }}/>

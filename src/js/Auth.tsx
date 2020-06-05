@@ -23,7 +23,6 @@ const setLoginStatus = (login,userid,userData,noteAllData) => {
 //urlパラメーター分解
 const getParam = (url) => {
     const pair = url.slice(1).split('&');
-    // const pair = url.split('&');
     let data = [];
   
     for(let i=0; pair[i]; i++) {
@@ -58,11 +57,12 @@ const setActiveData = async () => {
     if(data.share) {
         console.log('通りました',data.data)
         store.dispatch({type: 'SET_NOTE_ACTIVE_DATA',payload: data.data})
+        console.log('ノートページ２') 
         return
     }
-   
-    store.dispatch({type: 'SET_QUERY',payload: ''})
-    store.dispatch({type: 'SET_QUERY_DATA',payload: {}}) 
+    // console.log('ノートページ２') 
+    // store.dispatch({type: 'SET_QUERY',payload: ''})
+    // store.dispatch({type: 'SET_QUERY_DATA',payload: {}}) 
 }
 
 const Auth = (props) => {
@@ -73,11 +73,12 @@ const Auth = (props) => {
         store.dispatch({ type: 'SET_QUERY', payload: query})
         const urlData = getParam(query);
         store.dispatch({ type: 'SET_QUERY_DATA', payload: urlData})
+        setActiveData()
         
     }
 
     if(store.getState().isLogin && store.getState().query) {
-        setActiveData()
+        
         return props.children
     }
     

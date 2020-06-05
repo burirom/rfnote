@@ -17,9 +17,10 @@ const CardTitle = (props) => {
   )
 }
 
-const CardShare = () => {
+const CardShare = (props) => {
   const commonClasses = commonStyles()
   const [open, setOpen] = React.useState(false)
+  
 
   const modalHandleOpen = () => {
     setOpen(true);
@@ -32,14 +33,21 @@ const CardShare = () => {
   return (
       <>
         <IconButton onClick={modalHandleOpen}>
-          <ShareIcon className={commonClasses.thirdTextColor} />
+          <ShareIcon className={props.shareStatus ? commonClasses.subTextColor : commonClasses.thirdTextColor} />
         </IconButton>
-        <ShareModal open={open} noteId='テスト成功' 
-            modalHandleClose={modalHandleClose}
+        <ShareModal 
+          open={open}
+          modalHandleClose={modalHandleClose}
+          shareUrl = {props.shareUrl}
+          shareStatus = {props.shareStatus}
+          switchOnChangeHandle ={props.switchOnChangeHandle}
         />
       </>
   )
 }
+
+
+
 const CardBookMark = (props) => {
   const commonClasses = commonStyles()
   return (

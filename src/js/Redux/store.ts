@@ -19,7 +19,7 @@ const loginState = {
 
 } 
 
-//vTKLHc3L4pgxj30LucOjmvOxjxL2 8lf1dPcrsGnIsX9mRjWG
+//?user=vTKLHc3L4pgxj30LucOjmvOxjxL2&id=8lf1dPcrsGnIsX9mRjWG
 
 const reducer = (state = loginState, action) => {
     switch(action.type) {

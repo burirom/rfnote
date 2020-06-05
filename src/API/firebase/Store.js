@@ -76,6 +76,19 @@ const updateBookMark = (userID,noteID,data) => {
     {merge: true});
 }
 
+//Noteのshareアップデート
+const updateShare = (userID,noteID,data) => {
+    console.log('シェアをアップデートします')
+    const docRefUser = store.collection('user').doc(userID);
+    const docRefNote = docRefUser.collection('Note').doc(noteID);
+    const todo = new Date()
+    docRefNote.set({
+        share: data,
+        update: todo
+    },
+    {merge: true});
+}
+
 //Noteの消去
 const deleteNote =  (userID,noteID) => {
     const docRefUser = store.collection('user').doc(userID);
@@ -124,9 +137,25 @@ const getNoteData = async (userID,NoteID) => {
 
 /* Share */
 
-  //insert
-  const shareInsert = (userId,noteId) => {
-     
+  //shareステータス リアルタイム取得
+  const getShareStatus = async (userId,noteId) => {
+    const docRefUser = store.collection('user').doc(userId);
+    const docRefNote = await docRefUser.collection("Note").doc(noteId);
+    let share = false
+
+    docRefNote.onSnapshot(
+        function(querySnapshot) {
+            if(querySnapshot) {
+                this.share = querySnapshot.data().share
+                
+                return
+            } 
+            this.share = false
+        }
+    )
+    console.log('リアルタイム変更されました',share)
+
+    return share     
   }
 
   //update
@@ -158,5 +187,7 @@ export {
     updateBookMark,
     deleteNote,
     getAllNoteData,
-    getNoteData
+    getNoteData,
+    updateShare,
+    getShareStatus
 }
