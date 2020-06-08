@@ -34,7 +34,7 @@ const  InputArea =  () => {
 
     const getStoreNoteData = () => {
       if(Object.keys(store.getState().noteActiveData).length === 0) return nullContentDefaultData
-      console.log('実験通りました',store.getState().noteActiveData)
+      console.log(store.getState().query)
       const noteLength = Object.keys(store.getState().noteActiveData.data.data).length
       return noteLength !== 0  ? store.getState().noteActiveData.data.data : nullContentDefaultData
     }
@@ -48,7 +48,6 @@ const  InputArea =  () => {
     const sendData = async () => {
 
       if(store.getState().noteActiveData.id) {
-        
         await updateNote(userID,store.getState().noteActiveData.id,content)
         const noteData = await getAllNoteData(userID)
         store.dispatch({type:'SET_NOTE_DATA',payload: noteData})
@@ -73,7 +72,6 @@ const  InputArea =  () => {
     return (
         <Box className={FormatClasses.mt70}>
           <Editor 
-            // contentState = {content}
             defaultContentState = {content}
             toolbar = {toolBar}
             wrapperClassName="wrapper-class"
@@ -84,7 +82,7 @@ const  InputArea =  () => {
           <GridCenter>
               <Fab variant="extended" color="primary" aria-label="add" onClick={sendData} >
                 <NavigationIcon />
-                保存
+                {store.getState().query ? '自分のノートに保存' : '保存する'}
               </Fab>
           </GridCenter>
         

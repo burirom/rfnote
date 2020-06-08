@@ -10,7 +10,7 @@ import ShareModal from '../modal/ShareModal';
 const CardTitle = (props) => {
   return (
       <>
-        <Typography variant="h5" component="h2">
+        <Typography component="h6">
            {props.title}
         </Typography>
       </>
@@ -33,7 +33,7 @@ const CardShare = (props) => {
   return (
       <>
         <IconButton onClick={modalHandleOpen}>
-          <ShareIcon className={props.shareStatus ? commonClasses.subTextColor : commonClasses.thirdTextColor} />
+          <ShareIcon className={props.shareStatus ? commonClasses.subTextColor : commonClasses.fourthTextColor} />
         </IconButton>
         <ShareModal 
           open={open}
@@ -53,7 +53,7 @@ const CardBookMark = (props) => {
   return (
       <>
       <IconButton　onClick={props.onClick}>
-        <BookmarkIcon　className={props.active ? commonClasses.subTextColor : commonClasses.thirdTextColor}/>
+        <BookmarkIcon　className={props.active ? commonClasses.subTextColor :  commonClasses.fourthTextColor}/>
       </IconButton>
       </>
   )
@@ -65,7 +65,7 @@ const CardDelete = (props) => {
   return (
       <>
       <IconButton onClick={props.onClick} className={cardClass.deleteBtn}>
-        <DeleteIcon　className={commonClasses.thirdTextColor}/>
+        <DeleteIcon　className={commonClasses.deleteColor}/>
       </IconButton>
       </>
   )

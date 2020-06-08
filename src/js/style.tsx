@@ -1,5 +1,4 @@
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { createMuiTheme } from '@material-ui/core/styles';
 
 
 const commonStyles = makeStyles((Theme) =>
@@ -25,6 +24,9 @@ const commonStyles = makeStyles((Theme) =>
     thirdTextColor: {
       color: '#323643 !important'
     },
+    fourthTextColor: {
+      color: '#f7f7f7 !important'
+    },
     pd0:{
       padding: '0'
     },
@@ -45,8 +47,11 @@ const commonStyles = makeStyles((Theme) =>
     },
     errorTextColor: {
       color: '#fe1235'
+    },
+    deleteColor: {
+      color: '#dc143c'
     }
-  }),
+  })
 );
 
 const searchStyles = makeStyles((Theme) =>
@@ -107,7 +112,35 @@ const CardStyles = makeStyles((Theme) =>
     },
     mainContent: {
       width: '100%',
-      textAlign: 'start'
+      textAlign: 'start',
+      background: '#f7f7f7',
+      borderLeft: '3px solid #323643',
+      borderRight: '3px solid #323643',
+      borderTop: '1px solid #323643'
+    },
+    noteContent: {
+      maxHeight: '100px',
+      minHeight: '100px',
+      paddingTop: '5px',
+      paddingBottom: '5px',
+      overflow: 'hidden',
+    },
+    noteContentLetter: {
+      paddingBottom: '10px',
+      maxHeight: '80px',
+      overflow: 'hidden',
+      fontSize: '0.8rem !important',
+      color: '#696969 !important',
+      
+    },
+    noteContentTitle: {
+      fontSize: '0.8rem !important'
+    },
+    noteTitle: {
+      paddingBottom: '0px !important',
+    },
+    noteTitleFont: {
+      
     }
   }),
 );

@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { CardStyles } from '../../style'
+import { CardStyles,commonStyles } from '../../style'
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
+import clsx from 'clsx';
 import Typography from '@material-ui/core/Typography';
 import { CardTitle, CardShare, CardBookMark, CardDelete } from '../../Components/card/CardItem'
 
@@ -17,6 +18,7 @@ import { deleteNote,updateBookMark,updateShare,getShareStatus } from '../../../A
 
 const HomeCard = () => {
     const cardClass = CardStyles()
+    const commonClasses = commonStyles();
     const { history } = useReactRouter();
     const userId = store.getState().user.userId
     const [noteData,setNoteData] = React.useState(store.getState().noteData)
@@ -56,6 +58,16 @@ const HomeCard = () => {
         setNoteData(store.getState().noteData)
     }
 
+    //ノートの内容を作成
+    const createNoteContents = (data) => {
+        let content = '';
+        const length = data.length;
+        for(let i = 0; i < length; i++) {
+            content += data[i].text
+        }
+        return content
+    }
+
 
     return (
         <div className={cardClass.Card}>
@@ -65,39 +77,52 @@ const HomeCard = () => {
                 noteData.map((data,idx) => {
 
                 const title = data.data.data.blocks[0].text
+                
+                //テスト
+                const noteContent = createNoteContents(data.data.data.blocks)
+                console.log('ノート内容',noteContent)
+
+
                 const id = data.id
                 const bookMark = data.data.bookMark
                 const userId = store.getState().user.userId
-                // const TEST = React.useState('テストでし')
-                // const [shareStatus,setShareStatus] = React.useState(data.data.share)
-                var shareStatus = data.data.share
                 
                 const switchOnChangeHandle = async (event) => {
-                    // await updateShare(userId,id,!data.data.share)
-                    // const status = await getShareStatus(userId,id)
-                    // data.data.share = status
-                    // console.log('代入しました',data.data.share)
                     switchOnChangeHandleEvent(userId,id,!data.data.share)
                 }
                 return (
                     <Grid key={idx} item xs={12} md={6} lg={3}>
                         <Card className={cardClass.cardBottom}>
-                            <button className={cardClass.mainContent} 
+                            <div className={clsx(cardClass.mainContent)} 
                                 onClick={() => {
                                     sendData(id)
                                 }}
                             >
-                                <CardContent>
-                                    <Typography color="textSecondary" gutterBottom>
-                                    Title
+                                <CardContent className={cardClass.noteTitle}>
+                                    <Typography 
+                                       className={cardClass.noteTitle}
+                                       gutterBottom 
+                                       variant="h5"
+                                       component="h3"
+                                    >
+                                        {
+                                            title !== '' ? title : '無題'
+                                        }
                                     </Typography>
                                 </CardContent>
                                 
-                                <CardContent>
-                                    <CardTitle title={title}></CardTitle>
+                                <CardContent className={cardClass.noteContent} >
+                                    <div className={cardClass.noteContentLetter}>
+                                        {
+                                           noteContent !== '' ? noteContent : '空です'
+                                        }
+
+                                    </div>
                                 </CardContent>
-                            </button>
-                            <CardActions disableSpacing>
+
+                                
+                            </div>
+                            <CardActions disableSpacing className={clsx(commonClasses.subBackColor)}>
                                 <CardBookMark onClick={() => {
                                     bookMarkEvent(id,bookMark)
                                 }}
