@@ -25,7 +25,6 @@ const  InputArea =  () => {
 
     React.useEffect(() => {
       return () => {
-        store.dispatch({ type: 'SET_ACTIVE_ID', payload: null})
         store.dispatch({ type: 'SET_NOTE_ACTIVE_DATA', payload: {}})
         store.dispatch({ type: 'SET_QUERY', payload: '' })
         store.dispatch({ type: 'SET_QUERY_DATA', payload: {} })
@@ -34,9 +33,10 @@ const  InputArea =  () => {
 
 
     const getStoreNoteData = () => {
-      console.log('ノートページ3')
-      const noteLength = Object.keys(store.getState().noteActiveData).length
-      return noteLength !== 0  ? store.getState().noteActiveData : nullContentDefaultData
+      if(Object.keys(store.getState().noteActiveData).length === 0) return nullContentDefaultData
+      console.log('実験通りました',store.getState().noteActiveData)
+      const noteLength = Object.keys(store.getState().noteActiveData.data.data).length
+      return noteLength !== 0  ? store.getState().noteActiveData.data.data : nullContentDefaultData
     }
 
 
@@ -47,8 +47,9 @@ const  InputArea =  () => {
 
     const sendData = async () => {
 
-      if(store.getState().noteActiveID) {
-        await updateNote(userID,store.getState().noteActiveID,content)
+      if(store.getState().noteActiveData.id) {
+        
+        await updateNote(userID,store.getState().noteActiveData.id,content)
         const noteData = await getAllNoteData(userID)
         store.dispatch({type:'SET_NOTE_DATA',payload: noteData})
         history.push('home')

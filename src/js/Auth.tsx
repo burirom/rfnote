@@ -41,8 +41,6 @@ export const alreadyLoginCheck = async () => {
             const userId = user.uid;
             const userData = await getUserImgUrl(userId)
             const noteData = await getAllNoteData(userId)
-    
-            console.log('タイミング')
             setLoginStatus(true,{email,userId},userData,noteData)
             return
         }
@@ -56,13 +54,12 @@ const setActiveData = async () => {
     const data = await getNoteData(user,id)
     if(data.share) {
         console.log('通りました',data.data)
-        store.dispatch({type: 'SET_NOTE_ACTIVE_DATA',payload: data.data})
-        console.log('ノートページ２') 
+        store.dispatch({type: 'SET_NOTE_ACTIVE_DATA',payload:{
+            id:id,
+            data:data  
+        }})
         return
     }
-    // console.log('ノートページ２') 
-    // store.dispatch({type: 'SET_QUERY',payload: ''})
-    // store.dispatch({type: 'SET_QUERY_DATA',payload: {}}) 
 }
 
 const Auth = (props) => {

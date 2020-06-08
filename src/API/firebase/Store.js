@@ -77,12 +77,12 @@ const updateBookMark = (userID,noteID,data) => {
 }
 
 //Noteのshareアップデート
-const updateShare = (userID,noteID,data) => {
-    console.log('シェアをアップデートします')
+const updateShare = async (userID,noteID,data) => {
+    console.log('シェアをアップデートします',data)
     const docRefUser = store.collection('user').doc(userID);
     const docRefNote = docRefUser.collection('Note').doc(noteID);
     const todo = new Date()
-    docRefNote.set({
+    await docRefNote.set({
         share: data,
         update: todo
     },
@@ -141,21 +141,22 @@ const getNoteData = async (userID,NoteID) => {
   const getShareStatus = async (userId,noteId) => {
     const docRefUser = store.collection('user').doc(userId);
     const docRefNote = await docRefUser.collection("Note").doc(noteId);
-    let share = false
 
-    docRefNote.onSnapshot(
-        function(querySnapshot) {
-            if(querySnapshot) {
-                this.share = querySnapshot.data().share
-                
-                return
+    const shareStatusData = await docRefNote.get().then(
+       (doc)  => {
+            if(doc.data()) {
+                return  doc.data().share
             } 
-            this.share = false
-        }
+            return formatDiagnosticsWithColorAndContext
+       }
+    ).catch(
+      (error) => {
+        console.log('shareステータス取得でエラー',error)
+        return false
+      }
     )
-    console.log('リアルタイム変更されました',share)
-
-    return share     
+    console.log('リアルタイム変更されました',shareStatusData)
+    return shareStatusData     
   }
 
   //update

@@ -44,6 +44,9 @@ const reducer = (state = loginState, action) => {
         case 'UPDATA_NOTE_DATA_BOOKMARK':
             const bookMarkData = updateBookMark(state.noteData,action.payload)
             return { ...state, noteData: bookMarkData}
+        case 'UPDATA_NOTE_DATA_SHARE':
+            const shareData = updateShare(state.noteData,action.payload.id,action.payload.status)
+            return { ...state, noteData: shareData}
         case 'DELETE_NOTE_DATA':
             const data = removeItem(state.noteData,action.payload)
             return { ...state, noteData: data }
@@ -56,7 +59,7 @@ const reducer = (state = loginState, action) => {
 
 const store = createStore(reducer);
 
-
+//ブックマークをアップデート
 const updateBookMark = (array,item) => {
     let data = []
      array.forEach(element => {
@@ -66,13 +69,18 @@ const updateBookMark = (array,item) => {
         data.push(element)
     });
     return data
-    //  array.filte((v, i) => {
-    //     console.log('id',v.id,'送られてきたid',item)
-    //     console.log('あいうr歩',v.data.bookMark)
-    //     if(v.id === item) {
-    //         v.data.bookMark ===  !v.data.bookMark
-    //     }
-    // })
+}
+
+//シェアをアップデート
+const updateShare = (array,item,status) => {
+    let data = []
+     array.forEach(element => {
+        if(element.id === item) {
+            element.data.share = status
+        }
+        data.push(element)
+    });
+    return data
 }
 
 const removeItem = (array,item) => {

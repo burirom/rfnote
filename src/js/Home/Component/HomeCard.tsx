@@ -19,7 +19,7 @@ const HomeCard = () => {
     const cardClass = CardStyles()
     const { history } = useReactRouter();
     const userId = store.getState().user.userId
-    const [noteData,setNoteData] = React.useState( store.getState().noteData)
+    const [noteData,setNoteData] = React.useState(store.getState().noteData)
 
     const bookMarkEvent = (id,bookMark) => {
         store.dispatch({ type: 'UPDATA_NOTE_DATA_BOOKMARK',payload: id})
@@ -36,20 +36,25 @@ const HomeCard = () => {
     const sendData = (id) => {
         const noteData = store.getState().noteData
         const contentData = noteData.filter(data => data.id === id)
-        store.dispatch({type: 'SET_NOTE_ACTIVE_DATA', payload: contentData[0].data.data})
+        store.dispatch({type: 'SET_NOTE_ACTIVE_DATA', payload: contentData[0]})
         history.push('note')
     }
 
     const setShareUrl = (userId,noteId) => {
-        // console.log(userId,noteId)
         return location.origin + '/note?user='+userId+'&id='+noteId
     }
 
 
-    // //共有リンクステータスセット
-    // const switchOnChangeHandle = async (id) => {
-    //     await console.log('aaaaa',id)
-    // }
+    //共有リンクステータスセット
+    const switchOnChangeHandleEvent = async (userId,noteId,shareStatus) => {
+        await updateShare(userId,noteId,shareStatus)
+        const status = await getShareStatus(userId,noteId,shareStatus)
+        store.dispatch({ type: 'UPDATA_NOTE_DATA_SHARE',payload: {
+            id: noteId,
+            status: status
+        }})
+        setNoteData(store.getState().noteData)
+    }
 
 
     return (
@@ -63,12 +68,16 @@ const HomeCard = () => {
                 const id = data.id
                 const bookMark = data.data.bookMark
                 const userId = store.getState().user.userId
-                const shareStatus = (userId,id) => {
-                    return getShareStatus(userId,id)
-                }
+                // const TEST = React.useState('テストでし')
+                // const [shareStatus,setShareStatus] = React.useState(data.data.share)
+                var shareStatus = data.data.share
+                
                 const switchOnChangeHandle = async (event) => {
-                    console.log('ステータス',event.target.checked,'リアルタイム')
-                    await updateShare(userId,id,event.target.checked)
+                    // await updateShare(userId,id,!data.data.share)
+                    // const status = await getShareStatus(userId,id)
+                    // data.data.share = status
+                    // console.log('代入しました',data.data.share)
+                    switchOnChangeHandleEvent(userId,id,!data.data.share)
                 }
                 return (
                     <Grid key={idx} item xs={12} md={6} lg={3}>
@@ -96,8 +105,8 @@ const HomeCard = () => {
                                 />
                                 <CardShare 
                                    shareUrl={setShareUrl(userId,id)}
-                                   shareStatus = {shareStatus(userId,id)}
-                                   switchOnChangeHandle={switchOnChangeHandle}
+                                   shareStatus = {data.data.share}
+                                   switchOnChangeHandle = {switchOnChangeHandle}
                                 />
                                 <CardDelete onClick={() => {
                                     deleteEvent(id)
