@@ -7,7 +7,7 @@ import '../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.cs
 
 import GridCenter from '../../Components/Grid/GridCenter'
 import Fab from '@material-ui/core/Fab';
-import NavigationIcon from '@material-ui/icons/Navigation';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
 import useReactRouter from 'use-react-router';
 
@@ -34,7 +34,6 @@ const  InputArea =  () => {
 
     const getStoreNoteData = () => {
       if(Object.keys(store.getState().noteActiveData).length === 0) return nullContentDefaultData
-      console.log(store.getState().query)
       const noteLength = Object.keys(store.getState().noteActiveData.data.data).length
       return noteLength !== 0  ? store.getState().noteActiveData.data.data : nullContentDefaultData
     }
@@ -80,8 +79,10 @@ const  InputArea =  () => {
             onChange={setContent}
           />
           <GridCenter>
-              <Fab variant="extended" color="primary" aria-label="add" onClick={sendData} >
-                <NavigationIcon />
+              <Fab variant="extended" color="primary" aria-label="add" onClick={sendData} 
+                 className={FormatClasses.fixedBtn}
+              >
+                <AddCircleOutlineIcon />
                 {store.getState().query ? '自分のノートに保存' : '保存する'}
               </Fab>
           </GridCenter>

@@ -87,7 +87,8 @@ const footerStyles = makeStyles((Theme) =>
         bottom: '0',
         left: '0',
         right: '0',
-        borderTop: '2px solid #93deff'
+        borderTop: '2px solid #93deff',
+        zIndex: '9999'
     },
     root: {
       background:'#323643'
@@ -98,10 +99,12 @@ const footerStyles = makeStyles((Theme) =>
 const CardStyles = makeStyles((Theme) =>
   createStyles({
     Card: {
-      paddingTop:'10px',
+      paddingTop:'100px',
+      marginBottom: '70px'
     },
     cardBottom: {
-      borderBottom: '2px solid #323643'
+      borderBottom: '2px solid #323643',
+      boxShadow: '0 8px 10px 1px rgba(0, 0, 0, .5)'
     },
     deleteBtn: {
       marginLeft: 'auto'
@@ -155,6 +158,13 @@ const FormatStyles = makeStyles((Theme) =>
     },
     mt70: {
       marginTop: "70px"
+    },
+    fixedBtn: {
+      position: 'fixed',
+      top: 'auto',
+      bottom: '70px',
+      left: 'auto',
+      right: '20px'
     }
   }))
 

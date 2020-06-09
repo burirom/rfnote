@@ -6,7 +6,7 @@ import CommonContainer from '../../Components/Container/CommonContainer'
 function BookMark () {
     return (
         <CommonContainer>
-            <SerchBar />
+            {/* <SerchBar /> */}
             <BookMarkCard />   
         </CommonContainer>
     )

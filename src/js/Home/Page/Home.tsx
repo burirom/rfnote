@@ -7,7 +7,6 @@ import useReactRouter from 'use-react-router';
 
 
 function Home () {
-    console.log('ホーム',store.getState())
     const { history } = useReactRouter();
 
     React.useEffect(() => {
@@ -15,7 +14,7 @@ function Home () {
     },[])
     return (
         <CommonContainer>
-          <SerchBar />
+          {/* <SerchBar /> */}
           <HomeCard />
         </CommonContainer>
     )

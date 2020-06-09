@@ -61,7 +61,6 @@ function ChangeImg() {
                                 <input type="file" className={changeImgClasses.inputFile} 
                                    onChange={({ target: { validity, files } }) => {
                                     if (validity.valid) {
-                                        console.log(URL.createObjectURL(files[0]))
                                         setImgBlob(files[0])
                                         setImgUrl(URL.createObjectURL(files[0]))
                                     }

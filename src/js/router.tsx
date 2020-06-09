@@ -21,7 +21,6 @@ const RouterComponent = () => {
                 <TitleBar />
                 <Route exact path='/login' component={Loginpage} />
                 <Route exact path='/signup' component={SignUp} />
-                {/* <Route exact path='/share' component={Share} /> */}
                     <Auth>
                         <FooterBar />
                         <Route exact path={['/home', '/']} component={Home} />

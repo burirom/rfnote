@@ -53,7 +53,6 @@ const setActiveData = async () => {
     const id = store.getState().queryData.id
     const data = await getNoteData(user,id)
     if(data.share) {
-        console.log('通りました',data.data)
         store.dispatch({type: 'SET_NOTE_ACTIVE_DATA',payload:{
             id:id,
             data:data  

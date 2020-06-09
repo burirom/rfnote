@@ -31,7 +31,7 @@ export const toolBar = {
       className: undefined,
       component: undefined,
       dropdownClassName: undefined,
-      options: ['left', 'center', 'right', 'justify']
+      options: ['left', 'center', 'right']
     },
     colorPicker: {
       className: undefined,

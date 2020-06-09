@@ -63,26 +63,34 @@ const HomeCard = () => {
         let content = '';
         const length = data.length;
         for(let i = 0; i < length; i++) {
-            content += data[i].text
+            if(i !== 0) content += data[i].text;
         }
         return content
     }
 
+    //ノートのタイトル判断
+    const createNoteTitle =  (title) => {
+        const lengthCount = title.length
+
+        if(lengthCount <= 15) return title
+
+        return title.slice(0,15) + '...'
+
+    }
+
 
     return (
-        <div className={cardClass.Card}>
+        <div className={clsx(cardClass.Card)}>
             <Grid container spacing={3}>
 
             {
                 noteData.map((data,idx) => {
 
-                const title = data.data.data.blocks[0].text
+                const title = createNoteTitle(data.data.data.blocks[0].text)
+                console.log(title, 'タイトル')
                 
-                //テスト
                 const noteContent = createNoteContents(data.data.data.blocks)
-                console.log('ノート内容',noteContent)
-
-
+            
                 const id = data.id
                 const bookMark = data.data.bookMark
                 const userId = store.getState().user.userId

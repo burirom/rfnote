@@ -59,7 +59,6 @@ const LoginPage = () => {
 
     //ログイン処理
     const loginStatus = await signIn(email,password)
-    console.log( 'logウイン',loginStatus )
     　//ログイン失敗時
      if ( !loginStatus ) {
       setErrorMessage('メールアドレスまたはパスワードが違います。')

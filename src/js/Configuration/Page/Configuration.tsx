@@ -20,7 +20,7 @@ const ConfigurationPage = () => {
 
       
     const handleLogout = async () => {
-        console.log('ログアウトしました。')
+    
         await signOut()
         store.dispatch({ type: 'LOGIN', payload: false})
     }
