@@ -88,7 +88,7 @@ const footerStyles = makeStyles((Theme) =>
         left: '0',
         right: '0',
         borderTop: '2px solid #93deff',
-        zIndex: '9999'
+        // zIndex: '9999'
     },
     root: {
       background:'#323643'
