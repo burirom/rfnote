@@ -99,7 +99,7 @@ const HomeCard = () => {
                     switchOnChangeHandleEvent(userId,id,!data.data.share)
                 }
                 return (
-                    <Grid key={idx} item xs={12} md={6} lg={3}>
+                    <Grid key={idx} item xs={12} sm={12} md={6} lg={3}>
                         <Card className={cardClass.cardBottom}>
                             <div className={clsx(cardClass.mainContent)} 
                                 onClick={() => {
